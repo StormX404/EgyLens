@@ -166,7 +166,7 @@ fun NavGraph(
                     PreScanScreen(navController)
                 }
                 composable(route = Route.CameraScreen.route) {
-                    CameraScreen(context = LocalContext.current)
+                    CameraScreen( navController , context = LocalContext.current)
                 }
                 composable(route = Route.FaqScreen.route) {
                     FaqScreen()
@@ -180,7 +180,7 @@ fun NavGraph(
                 ) { backStackEntry ->
                     val name = backStackEntry.arguments?.getString("name") ?: ""
                     val desc = backStackEntry.arguments?.getString("desc") ?: ""
-                    DetailsScreen( name, desc )
+                    DetailsScreen( navController , name, desc )
                 }
 
 

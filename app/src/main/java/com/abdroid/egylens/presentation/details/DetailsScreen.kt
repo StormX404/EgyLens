@@ -53,6 +53,7 @@ import com.abdroid.egylens.ui.theme.notoFont
 
 @Composable
 fun DetailsScreen(
+    navController: NavController,
     statueName: String,
     statueDesc: String,
     ) {
@@ -108,7 +109,8 @@ fun DetailsScreen(
                 modifier = Modifier
                     .size(40.dp)
                     .clip(shape = CircleShape)
-                    .background(Color.Black.copy(alpha = .3f)),
+                    .background(Color.Black.copy(alpha = .3f))
+                    .clickable { navController.popBackStack() },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

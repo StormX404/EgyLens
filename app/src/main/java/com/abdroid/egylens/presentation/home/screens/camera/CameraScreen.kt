@@ -47,6 +47,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.abdroid.egylens.MainActivity.MainActivity
 import com.abdroid.egylens.R
 import com.abdroid.egylens.ui.theme.notoFont
@@ -59,6 +61,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
 fun CameraScreen(
+    navController: NavController,
     context: Context = LocalContext.current
 ) {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.scanning_y))
@@ -103,12 +106,13 @@ fun CameraScreen(
             ) {
                 Icon(
                     modifier = Modifier
+                        .clickable { navController.popBackStack() }
                         .size(35.dp),
                     painter = painterResource(id = R.drawable.close),
                     contentDescription ="",
                     tint = Color.White
                 )
-                Spacer(modifier = Modifier.width(5.dp))
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Focus on statue",
                     fontFamily = notoFont,
@@ -222,6 +226,6 @@ fun CameraScreen(
 @Preview
 @Composable
 private fun CameraScreenPrev() {
-    CameraScreen()
+    CameraScreen(navController = rememberNavController())
 }
 
