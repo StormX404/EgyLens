@@ -195,7 +195,11 @@ fun HomeScreen(
                             .background(colorResource(id = R.color.background))
                             .padding(horizontal = 8.dp)
                             .clip(RoundedCornerShape(20.dp))
-                            .clickable { navController.navigate("detailsScreen/${newStatues.name}/${newStatues.desc}") },
+                            .clickable {
+                                navController.currentBackStackEntry?.savedStateHandle?.set("statue", newStatues)
+                                navController.navigate(
+                                    route = Route.DetailsScreen.route
+                                ) },
                     ) {
                         Image(
                             painter = rememberAsyncImagePainter(newStatues.imageUrl),

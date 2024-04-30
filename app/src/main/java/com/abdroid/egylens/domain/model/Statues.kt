@@ -6,10 +6,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Statue(
     val statueId:Int = 1,
-    val name: String = "",
-    val desc: String = "",
-    val imageUrl: String = "",
+    val name: String,
+    val desc: String,
+    val imageUrl: String,
     val about :String,
 ) : Parcelable {
-    constructor() : this(1,"", "", "" , "") // Add a no-argument constructor
+    constructor() : this(1,"", "", "" , "")
 }

@@ -171,16 +171,30 @@ fun NavGraph(
                 composable(route = Route.FaqScreen.route) {
                     FaqScreen()
                 }
-                composable(
-                    Route.DetailsScreen.route + "/{name}/{desc}",
+                /*composable(
+                    Route.DetailsScreen.route + "/{name}/{desc}/{about}/{imageUrl}",
                     arguments = listOf(
                         navArgument("name") { type = NavType.StringType },
                         navArgument("desc") { type = NavType.StringType },
+                        navArgument("about") { type = NavType.StringType },
+                        navArgument("imageUrl") { type = NavType.StringType },
                     )
                 ) { backStackEntry ->
                     val name = backStackEntry.arguments?.getString("name") ?: ""
                     val desc = backStackEntry.arguments?.getString("desc") ?: ""
-                    DetailsScreen( navController , name, desc )
+                    val about = backStackEntry.arguments?.getString("about") ?: ""
+                    val imageUrl = backStackEntry.arguments?.getString("imageUrl")?.replace("\\", "/") ?: ""
+                    DetailsScreen( navController , name, desc  , about , imageUrl)
+                }*/
+                composable(route = Route.DetailsScreen.route) {
+                    navController.previousBackStackEntry?.savedStateHandle?.get<Statue?>("statue")
+                        ?.let { statue ->
+                            DetailsScreen(
+                                navController,
+                                statue = statue,
+                            )
+                        }
+
                 }
 
 

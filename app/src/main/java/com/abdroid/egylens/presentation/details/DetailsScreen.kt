@@ -26,6 +26,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,8 +55,8 @@ import com.abdroid.egylens.ui.theme.notoFont
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    statueName: String,
-    statueDesc: String,
+    statue: Statue,
+
     ) {
 
 
@@ -74,23 +75,23 @@ fun DetailsScreen(
         }
         val clickedState = remember { mutableStateOf(false) }
 
-        val topPadding by animateDpAsState(if (scrolled || clickedState.value) 100.dp else 300.dp,
+        val topPadding by animateDpAsState(if (scrolled || clickedState.value) 100.dp else 360.dp,
             label = ""
         )
 
 
         Image(
             modifier = Modifier
-                .height(350.dp)
+                .height(400.dp)
                 .fillMaxWidth(),
-            painter = rememberAsyncImagePainter("https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/GD-EG-Caire-Mus%C3%A9e061.JPG/330px-GD-EG-Caire-Mus%C3%A9e061.JPG"),
+            painter = rememberAsyncImagePainter(statue.imageUrl),
             contentScale = ContentScale.Crop,
             contentDescription = null,
             alignment = Alignment.TopCenter
         )
         Image(
             modifier = Modifier
-                .height(350.dp)
+                .height(400.dp)
                 .fillMaxWidth(),
             painter = painterResource(id = R.drawable.overlay_2),
             contentScale = ContentScale.Crop,
@@ -160,14 +161,14 @@ fun DetailsScreen(
 
             Column(modifier = Modifier.padding(horizontal = 20.dp)) {
                 Text(
-                    text = "Akhenaton",
+                    text = statue.name,
                     fontFamily = notoFont,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Medium,
                     color = colorResource(id = R.color.main_text),
                 )
                 Text(
-                    text = "was a king (c. 1353–36 BCE) of ancient Egypt of the 18th dynasty",
+                    text = statue.desc,
                     fontFamily = notoFont,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
@@ -182,7 +183,7 @@ fun DetailsScreen(
                 )
                 Column(modifier = Modifier.verticalScroll(scrollState)) {
                     Text(
-                        text = "Arguably the most famous of the New Kingdom pharaohs, Ramses II succeeded his father Seti I, and became king at the age of between 25 and 30. He enjoyed a long reign, ruling for 67 years, and left a well-recorded legacy.  He had many queens and sired around 100 children. His Great Royal Wife was Nefertari, for whom he built a temple near his own in Nubia, at Abu Simbel. Her tomb in the Valley of the Queens is perhaps the most beautiful sepulcher in the Theban necropolis. Ramses II also married at least one of his daughters, Meritamun.  Ramses II is remembered as a great warrior and recorded his Year 5 Battle of Kadesh, in which he fought against the Hittites. Although the actual outcome of the battle was a draw, the king was excessively proud of his personal bravery and military prowess, bragging that he had singlehandedly saved Egypt from what might have been a terrible defeat. He continued to skirmish with the Hittites for many years, but eventually signed a peace treaty—the first known in history—with their king, and married his daughter to seal the newly-founded alliance. The tomb of the ambassador who delivered the peace treaty has been found at Saqqara.  This pharaoh built temples almost everywhere in Egypt, as well as in Nubia. The most famous of his projects are Abu Simbel, the Ramesseum (dedicated to his mortuary cult), and his additions to Luxor Temple. He also founded a new capital, Pi-Ramses, in the Delta. For his own glory and the glory of Egypt, he erected many statues of himself, a great number of which he usurped from earlier kings. Ramses II was originally buried in KV 7, but his body was moved to the Deir el-Bahari cache to protect it from looting. In the late 20th century, the mummy was sent to the Musée de l’Homme in Paris for study and restoration, as it was in poor condition. In his official travel document, his occupation was listed as “King (deceased)”.",
+                        text = statue.about,
                         fontFamily = notoFont,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Normal,
