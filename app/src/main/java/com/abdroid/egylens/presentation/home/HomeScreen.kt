@@ -54,6 +54,8 @@ import com.abdroid.egylens.presentation.common.SearchBar
 import com.abdroid.egylens.ui.theme.notoFont
 import com.abdroid.egylens.presentation.common.CustomDotsIndicator
 import com.abdroid.egylens.presentation.common.CustomHomeTopAppBar
+import com.abdroid.egylens.presentation.common.Loader
+import com.abdroid.egylens.presentation.common.ShimmerEffect
 import com.abdroid.egylens.presentation.navGraph.Route
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -65,7 +67,7 @@ import kotlin.math.abs
 @Composable
 fun HomeScreen(
     navController: NavController,
-    navigateToSearch:() -> Unit,
+    navigateToSearch: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
 
@@ -93,165 +95,173 @@ fun HomeScreen(
     )
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
 
-    Column(
-    Modifier
-        .background(colorResource(id = R.color.background))
-        .fillMaxSize()
-        .statusBarsPadding(),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Top
-    ) {
-        CustomHomeTopAppBar(name = viewModel.currentUser?.displayName ?: "")
-        HorizontalDivider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = 1.dp,
-            color = colorResource(id = R.color.dvider)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            SearchBar(
-                text = "",
-                readOnly = true,
-                onValueChange = {},
-                onSearch = {},
-                onClick = { navigateToSearch() } ,
-                weight = .8f// Correctly invoke the lambda
-            )
-            Button(
-                onClick = {
-                    navController.navigate(Route.PreScanScreen.route)
-                },
-                modifier = Modifier.size(50.dp),
-                shape = CircleShape,
-                contentPadding = PaddingValues(0.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.scanner_button),
-                    contentColor = colorResource(id = R.color.button_text)
-                ),
-            ) {
-                Icon(
-                    modifier = Modifier.size(24.dp),
-                    painter = painterResource(id = R.drawable.scan),
-                    contentDescription = null,
-                    tint = colorResource(id = R.color.button_text)
-                )
-            }
-        }
+    if (statuesList.isEmpty()) {
+        ShimmerEffect()
+    } else {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            Modifier
+                .background(colorResource(id = R.color.background))
+                .fillMaxSize()
+                .statusBarsPadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
+            verticalArrangement = Arrangement.Top
         ) {
-            Row (modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start)
-            {
-                Text(
-                    text = "Popular Statues",
-                    fontFamily = notoFont,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Start,
-                    color = colorResource(id = R.color.main_text),
-                )
-            }
-
-            HorizontalPager(
-                state = pagerState,
-                contentPadding = PaddingValues(horizontal = 25.dp),
+            CustomHomeTopAppBar(name = viewModel.currentUser?.displayName ?: "")
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                thickness = 1.dp,
+                color = colorResource(id = R.color.dvider)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(400.dp)
-
-            ) { page ->
-                val pageOffset = (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
-                val scaleFactor = 1f - 0.2f * abs(pageOffset)
-                val alphaFactor = 0.5f + 0.5f * (1f - abs(pageOffset))
-                Card (
-                    modifier = Modifier
-                        .graphicsLayer {
-                            scaleX = scaleFactor.coerceIn(1f, 1f)
-                            scaleY = scaleFactor.coerceIn(.9f, 1f)
-                            alpha = alphaFactor.coerceIn(0.7f, 1f)
-                        }
-                        .fillMaxWidth()
-                        .height(400.dp),
-                shape = RoundedCornerShape(20.dp)
-
+                    .padding(horizontal = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                SearchBar(
+                    text = "",
+                    readOnly = true,
+                    onValueChange = {},
+                    onSearch = {},
+                    onClick = { navigateToSearch() },
+                    weight = .8f// Correctly invoke the lambda
+                )
+                Button(
+                    onClick = {
+                        navController.navigate(Route.PreScanScreen.route)
+                    },
+                    modifier = Modifier.size(50.dp),
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.scanner_button),
+                        contentColor = colorResource(id = R.color.button_text)
+                    ),
                 ) {
-                    val newStatues = statuesList[page]
+                    Icon(
+                        modifier = Modifier.size(24.dp),
+                        painter = painterResource(id = R.drawable.scan),
+                        contentDescription = null,
+                        tint = colorResource(id = R.color.button_text)
+                    )
+                }
+            }
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start
+                )
+                {
+                    Text(
+                        text = "Popular Statues",
+                        fontFamily = notoFont,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Start,
+                        color = colorResource(id = R.color.main_text),
+                    )
+                }
+                HorizontalPager(
+                    state = pagerState,
+                    contentPadding = PaddingValues(horizontal = 25.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(400.dp)
 
-                    Box(
+                ) { page ->
+                    val pageOffset =
+                        (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
+                    val scaleFactor = 1f - 0.2f * abs(pageOffset)
+                    val alphaFactor = 0.5f + 0.5f * (1f - abs(pageOffset))
+                    Card(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .background(colorResource(id = R.color.background))
-                            .padding(horizontal = 8.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                            .clickable {
-                                navController.currentBackStackEntry?.savedStateHandle?.set("statue", newStatues)
-                                navController.navigate(
-                                    route = Route.DetailsScreen.route
-                                ) },
+                            .graphicsLayer {
+                                scaleX = scaleFactor.coerceIn(1f, 1f)
+                                scaleY = scaleFactor.coerceIn(.9f, 1f)
+                                alpha = alphaFactor.coerceIn(0.7f, 1f)
+                            }
+                            .fillMaxWidth()
+                            .height(400.dp),
+                        shape = RoundedCornerShape(20.dp)
+
                     ) {
-                        Image(
-                            painter = rememberAsyncImagePainter(newStatues.imageUrl),
-                            contentDescription = "Image",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.overlay),
-                            contentDescription = "Image",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize(),
-                            alignment = Alignment.BottomCenter
-                        )
-                        Column(
+                        val newStatues = statuesList[page]
+                        Box(
                             modifier = Modifier
-                                .align(Alignment.BottomStart)
-                                .padding(15.dp)
+                                .fillMaxSize()
+                                .background(colorResource(id = R.color.background))
+                                .padding(horizontal = 8.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .clickable {
+                                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                                        "statue",
+                                        newStatues
+                                    )
+                                    navController.navigate(
+                                        route = Route.DetailsScreen.route
+                                    )
+                                },
                         ) {
-                            Text(
-                                text = newStatues.name,
-                                fontFamily = notoFont,
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = colorResource(id = R.color.slider_main_text),
+                            Image(
+                                painter = rememberAsyncImagePainter(newStatues.imageUrl),
+                                contentDescription = "Image",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize()
                             )
-                            Text(
-                                text = newStatues.desc,
-                                fontFamily = notoFont,
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = colorResource(id = R.color.second_text),
+                            Image(
+                                painter = painterResource(id = R.drawable.overlay),
+                                contentDescription = "Image",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize(),
+                                alignment = Alignment.BottomCenter
                             )
+                            Column(
+                                modifier = Modifier
+                                    .align(Alignment.BottomStart)
+                                    .padding(15.dp)
+                            ) {
+                                Text(
+                                    text = newStatues.name,
+                                    fontFamily = notoFont,
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = colorResource(id = R.color.slider_main_text),
+                                )
+                                Text(
+                                    text = newStatues.desc,
+                                    fontFamily = notoFont,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = colorResource(id = R.color.second_text),
+                                )
+                            }
                         }
                     }
                 }
-            }
+                Surface(
+                    modifier = Modifier
+                        .padding(bottom = 8.dp),
+                    shape = CircleShape,
+                    color = colorResource(id = R.color.main_text).copy(alpha = 0.8f)
+                ) {
+                    CustomDotsIndicator(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                        totalDots = pagerState.pageCount,
+                        selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
+                        dotSize = 10.dp
+                    )
+                }
 
-            Surface(
-                modifier = Modifier
-                    .padding(bottom = 8.dp),
-                shape = CircleShape,
-                color = colorResource(id = R.color.main_text).copy(alpha = 0.8f)
-            ) {
-                CustomDotsIndicator(
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                    totalDots = pagerState.pageCount,
-                    selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
-                    dotSize = 10.dp
-                )
             }
-
         }
 
     }
