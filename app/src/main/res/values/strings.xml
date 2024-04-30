@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Egy Lens</string>
+    <string name="email">Enter Your Email</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="open_gallery">Open gallery</string>
+    <string name="record_video">Record Video</string>
+    <string name="take_photo">Take photo</string>
+    <string name="switch_camera_preview">Switch camera preview</string>
+</resources>

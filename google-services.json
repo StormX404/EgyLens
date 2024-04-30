@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873724485593",
+    "project_id": "egylens-77f2f",
+    "storage_bucket": "egylens-77f2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873724485593:android:324e139569eca029e9c3c8",
+        "android_client_info": {
+          "package_name": "com.abdroid.egylens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873724485593-k8habmuv7bjotqt1c5dg7mkdo9blcs1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ9nOG5wg-iHyB1dYcQhIoUjwW6uDEZ5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873724485593-k8habmuv7bjotqt1c5dg7mkdo9blcs1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

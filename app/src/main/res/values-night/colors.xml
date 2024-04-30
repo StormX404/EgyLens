@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background">#171717</color>
+    <color name="splash_color">#171717</color>
+    <color name="main_button">#F7BC1E</color>
+    <color name="scanner_button">#F7BC1E</color>
+    <color name="second_button">#F7BC1E</color>
+    <color name="button_text">#000000</color>
+    <color name="main_text">#FFFFFF</color>
+    <color name="slider_main_text">#FFFFFF</color>
+    <color name="second_text">#6A6A6A</color>
+    <color name="text_field_bg">#202020</color>
+    <color name="text_field_icon">#FFFFFF</color>
+    <color name="text_field_border">#6A6A6A</color>
+    <color name="text_field_hint">#6A6A6A</color>
+    <color name="text_field_text">#FFFFFF</color>
+    <color name="text_field_eye">#6A6A6A</color>
+    <color name="back_button">#202020</color>
+    <color name="google_text">#FFFFFF</color>
+    <color name="nav_bar_selected_icon">#F7BC1E</color>
+    <color name="nav_bar_selected_text">#F7BC1E</color>
+    <color name="nav_bar_un_selected_icon">#FFFFFF</color>
+    <color name="nav_bar_un_selected_text">#FFFFFF</color>
+    <color name="bottom_bar">#141414</color>
+    <color name="dvider">#303030</color>
+
+
+</resources>
