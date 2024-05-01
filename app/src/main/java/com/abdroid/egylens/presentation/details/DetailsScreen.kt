@@ -56,6 +56,7 @@ import com.abdroid.egylens.ui.theme.notoFont
 fun DetailsScreen(
     navController: NavController,
     statue: Statue,
+    event: (DetailsEvent) -> Unit,
 
     ) {
 
@@ -224,6 +225,7 @@ fun DetailsScreen(
                         .clip(shape = CircleShape)
                         .background(Color.Black.copy(alpha = .3f))
                         .clickable {
+                            event(DetailsEvent.UpsertDeleteStatue(statue))
                             iconTint = if (iconTint == Color.White) Color.Red else Color.White
                         },
                     contentAlignment = Alignment.Center

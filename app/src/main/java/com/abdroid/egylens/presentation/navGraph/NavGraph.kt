@@ -26,7 +26,9 @@ import com.abdroid.egylens.domain.model.Statue
 import com.abdroid.egylens.presentation.common.AppBottomNavigation
 import com.abdroid.egylens.presentation.common.BottomNavigationItem
 import com.abdroid.egylens.presentation.details.DetailsScreen
+import com.abdroid.egylens.presentation.details.DetailsViewModel
 import com.abdroid.egylens.presentation.favorites.FavoritesScreen
+import com.abdroid.egylens.presentation.favorites.FavoritesViewModel
 import com.abdroid.egylens.presentation.signInFlow.forgotPassword.ForgotPasswordScreen
 import com.abdroid.egylens.presentation.home.HomeScreen
 import com.abdroid.egylens.presentation.home.screens.camera.CameraScreen
@@ -160,8 +162,13 @@ fun NavGraph(
                     SearchScreen(navController)
                 }
                 composable(route = Route.FavoritesScreen.route) {
+                    val viewModel: FavoritesViewModel = hiltViewModel()
+                    val state = viewModel.state.value
                     OnBackClickStateSaver(navController = navController)
-                    FavoritesScreen()
+                    FavoritesScreen(
+                        state = state,
+                        onClick = {}
+                    )
                 }
                 composable(route = Route.ProfileScreen.route) {
                     OnBackClickStateSaver(navController = navController)
@@ -178,11 +185,13 @@ fun NavGraph(
                 }
 
                 composable(route = Route.DetailsScreen.route) {
+                    val viewModel: DetailsViewModel = hiltViewModel()
                     navController.previousBackStackEntry?.savedStateHandle?.get<Statue?>("statue")
                         ?.let { statue ->
                             DetailsScreen(
                                 navController,
                                 statue = statue,
+                                event = viewModel::onEvent,
                             )
                         }
 

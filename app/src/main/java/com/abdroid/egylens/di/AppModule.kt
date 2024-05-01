@@ -1,6 +1,9 @@
 package com.abdroid.egylens.di
 
 import android.app.Application
+import androidx.room.Room
+import com.abdroid.egylens.data.local.AppDatabase
+import com.abdroid.egylens.data.local.StatueDao
 import com.abdroid.egylens.data.manager.AuthRepositoryImpl
 import com.abdroid.egylens.data.manager.LocalUserManagerImp
 import com.abdroid.egylens.domain.manager.AuthRepository
@@ -20,7 +23,24 @@ import javax.inject.Singleton
 object AppModule {
 
 
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(
+        application: Application
+    ): AppDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = AppDatabase::class.java,
+            name = "app_db"
+        ).fallbackToDestructiveMigration()
+            .build()
+    }
 
+    @Provides
+    @Singleton
+    fun provideNewsDao(
+        appDatabase: AppDatabase
+    ): StatueDao = appDatabase.statuteDao()
     @Provides
     @Singleton
     fun provideLocalUserManager(
