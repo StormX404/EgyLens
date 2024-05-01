@@ -37,12 +37,13 @@ fun StatueCard(
 ) {
     Row (
         modifier = Modifier
-            .clickable { onClick() }
             .border(
                 1.dp,
                 colorResource(id = R.color.text_field_border),
                 shape = RoundedCornerShape(14.dp)
             )
+            .clip(RoundedCornerShape(14.dp))
+            .clickable { onClick() }
             .padding(horizontal = 5.dp)
             .height(95.dp),
         verticalAlignment = Alignment.CenterVertically , horizontalArrangement = Arrangement.Start
