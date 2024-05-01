@@ -1,6 +1,6 @@
-package com.abdroid.egylens.data.manager
+package com.abdroid.egylens.data.repository
 
-import com.abdroid.egylens.domain.manager.AuthRepository
+import com.abdroid.egylens.domain.repository.AuthRepository
 import com.abdroid.egylens.util.Resource
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult

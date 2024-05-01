@@ -9,4 +9,8 @@ interface LocalUserManager {
 
     fun readAppEntry() : Flow<Boolean>
 
+    suspend fun saveIsBookmarked(articleUrl: String, isBookmarked: Boolean)
+
+    fun readIsBookmarked(articleUrl : String): Flow<Boolean>
+
 }

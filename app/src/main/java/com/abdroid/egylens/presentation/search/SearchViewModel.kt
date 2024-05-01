@@ -1,15 +1,10 @@
 package com.abdroid.egylens.presentation.search
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.abdroid.egylens.domain.manager.AuthRepository
 import com.abdroid.egylens.domain.model.Statue
-import com.abdroid.egylens.presentation.home.HomeState
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

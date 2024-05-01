@@ -1,14 +1,9 @@
 package com.abdroid.egylens.presentation.signInFlow.forgotPassword
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.abdroid.egylens.domain.manager.AuthRepository
-import com.abdroid.egylens.presentation.signInFlow.signIn.GoogleSignInState
-import com.abdroid.egylens.presentation.signInFlow.signIn.SignInState
+import com.abdroid.egylens.domain.repository.AuthRepository
 import com.abdroid.egylens.util.Resource
-import com.google.firebase.auth.AuthCredential
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

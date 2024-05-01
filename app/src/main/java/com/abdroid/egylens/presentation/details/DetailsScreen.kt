@@ -27,6 +27,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,12 +45,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.abdroid.egylens.R
 import com.abdroid.egylens.domain.model.Statue
 import com.abdroid.egylens.ui.theme.notoFont
+import com.abdroid.egylens.util.UIComponent
 
 
 @Composable
@@ -57,9 +60,11 @@ fun DetailsScreen(
     navController: NavController,
     statue: Statue,
     event: (DetailsEvent) -> Unit,
+    viewModel: DetailsViewModel = hiltViewModel()
 
     ) {
 
+    val isBookmarked by viewModel.isArticleBookmarked(statue.imageUrl).collectAsState(initial = false)
 
     Box(
         Modifier
@@ -68,6 +73,7 @@ fun DetailsScreen(
     ) {
 
         var iconTint by remember { mutableStateOf(Color.White) }
+
         val scrollState = rememberScrollState()
         val scrolled by remember {
             derivedStateOf {
@@ -112,7 +118,9 @@ fun DetailsScreen(
                     .size(40.dp)
                     .clip(shape = CircleShape)
                     .background(Color.Black.copy(alpha = .3f))
-                    .clickable { navController.popBackStack() },
+                    .clickable {
+                        navController.popBackStack()
+                               },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -226,7 +234,7 @@ fun DetailsScreen(
                         .background(Color.Black.copy(alpha = .3f))
                         .clickable {
                             event(DetailsEvent.UpsertDeleteStatue(statue))
-                            iconTint = if (iconTint == Color.White) Color.Red else Color.White
+                            viewModel.toggleBookmark(statue.imageUrl)
                         },
                     contentAlignment = Alignment.Center
                 ) {
@@ -234,7 +242,7 @@ fun DetailsScreen(
                         modifier = Modifier.size(30.dp),
                         painter = painterResource(id = R.drawable.heart_bold),
                         contentDescription = "",
-                        tint = animateColorAsState(iconTint, label = "").value,
+                        tint = if (isBookmarked) Color.Red else Color.White
                     )
                 }
             }

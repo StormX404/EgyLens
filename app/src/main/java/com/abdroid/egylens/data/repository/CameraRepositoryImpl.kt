@@ -1,4 +1,4 @@
-package com.abdroid.egylens.data.manager
+package com.abdroid.egylens.data.repository
 
 import android.app.Application
 import android.content.ContentResolver
@@ -19,7 +19,7 @@ import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.video.AudioConfig
 import androidx.core.content.ContextCompat
 import com.abdroid.egylens.R
-import com.abdroid.egylens.domain.manager.CameraRepository
+import com.abdroid.egylens.domain.repository.CameraRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

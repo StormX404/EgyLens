@@ -11,10 +11,11 @@ sealed class DataState<T> {
 
 sealed class UIComponent {
 
-    data class Toast(val message: String): UIComponent()
+    data class Toast(val message: String) : UIComponent()
 
-    data class Dialog(val title: String, val message: String): UIComponent()
+    data class Dialog(val title: String, val message: String) : UIComponent()
 
-    data class None(val message: String? = null): UIComponent()
+    data class None(val message: String? = null) : UIComponent()
 
+    data class IconTint(val tintColor: Int) : UIComponent()
 }

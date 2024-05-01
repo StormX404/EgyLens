@@ -16,6 +16,7 @@ class LocalUserManagerImp(
     private val context: Context
 ) : LocalUserManager {
 
+
     override suspend fun saveAppEntry() {
         context.dataStore.edit { settings ->
             settings[PreferenceKeys.APP_ENTRY] = true
@@ -27,7 +28,20 @@ class LocalUserManagerImp(
             preferences[PreferenceKeys.APP_ENTRY] ?: false
         }
     }
+    override suspend fun saveIsBookmarked(statueUrl: String, isBookmarked: Boolean) {
+        context.dataStore.edit { settings ->
+            settings[PreferenceKeys.isBookmarked(statueUrl)] = isBookmarked
+        }
+    }
+
+    override fun readIsBookmarked(statueUrl: String): Flow<Boolean> {
+        return context.dataStore.data.map { preferences ->
+            preferences[PreferenceKeys.isBookmarked(statueUrl)] ?: false
+        }
+    }
 }
+
+
 
 private val readOnlyProperty = preferencesDataStore(name = USER_SETTINGS)
 
@@ -35,4 +49,5 @@ val Context.dataStore: DataStore<Preferences> by readOnlyProperty
 
 private object PreferenceKeys {
     val APP_ENTRY = booleanPreferencesKey(Constants.APP_ENTRY)
+    fun isBookmarked(statueUrl: String) = booleanPreferencesKey(name = "is_bookmarked_$statueUrl")
 }

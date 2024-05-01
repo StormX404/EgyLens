@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.abdroid.egylens.domain.manager.AuthRepository
+import com.abdroid.egylens.domain.repository.AuthRepository
 import com.abdroid.egylens.domain.usecases.app_Entry.AppEntryUseCases
 import com.abdroid.egylens.presentation.navGraph.Route
 import com.google.firebase.auth.FirebaseUser

@@ -1,7 +1,7 @@
 package com.abdroid.egylens.di
 
-import com.abdroid.egylens.data.manager.CameraRepositoryImpl
-import com.abdroid.egylens.domain.manager.CameraRepository
+import com.abdroid.egylens.data.repository.CameraRepositoryImpl
+import com.abdroid.egylens.domain.repository.CameraRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.abdroid.egylens.domain.manager
+package com.abdroid.egylens.domain.repository
 
 import com.abdroid.egylens.util.Resource
 import com.google.firebase.auth.AuthCredential

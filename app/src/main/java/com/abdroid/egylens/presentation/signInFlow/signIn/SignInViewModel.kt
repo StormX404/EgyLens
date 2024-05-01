@@ -1,17 +1,15 @@
 package com.abdroid.egylens.presentation.signInFlow.signIn
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.abdroid.egylens.domain.manager.AuthRepository
+import com.abdroid.egylens.domain.repository.AuthRepository
 import com.abdroid.egylens.util.Resource
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

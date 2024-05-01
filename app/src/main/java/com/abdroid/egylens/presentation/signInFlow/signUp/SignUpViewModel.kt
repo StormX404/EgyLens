@@ -1,12 +1,8 @@
 package com.abdroid.egylens.presentation.signInFlow.signUp
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.abdroid.egylens.domain.manager.AuthRepository
-import com.abdroid.egylens.presentation.signInFlow.signIn.SignInState
+import com.abdroid.egylens.domain.repository.AuthRepository
 import com.abdroid.egylens.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel

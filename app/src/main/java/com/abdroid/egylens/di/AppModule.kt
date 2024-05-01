@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.room.Room
 import com.abdroid.egylens.data.local.AppDatabase
 import com.abdroid.egylens.data.local.StatueDao
-import com.abdroid.egylens.data.manager.AuthRepositoryImpl
+import com.abdroid.egylens.data.repository.AuthRepositoryImpl
 import com.abdroid.egylens.data.manager.LocalUserManagerImp
-import com.abdroid.egylens.domain.manager.AuthRepository
+import com.abdroid.egylens.domain.repository.AuthRepository
 import com.abdroid.egylens.domain.manager.LocalUserManager
 import com.abdroid.egylens.domain.usecases.app_Entry.AppEntryUseCases
 import com.abdroid.egylens.domain.usecases.app_Entry.ReadAppEntry

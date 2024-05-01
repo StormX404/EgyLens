@@ -167,7 +167,7 @@ fun NavGraph(
                     OnBackClickStateSaver(navController = navController)
                     FavoritesScreen(
                         state = state,
-                        onClick = {}
+                        navController
                     )
                 }
                 composable(route = Route.ProfileScreen.route) {
