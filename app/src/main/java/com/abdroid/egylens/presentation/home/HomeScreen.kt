@@ -54,7 +54,6 @@ import com.abdroid.egylens.presentation.common.SearchBar
 import com.abdroid.egylens.ui.theme.notoFont
 import com.abdroid.egylens.presentation.common.CustomDotsIndicator
 import com.abdroid.egylens.presentation.common.CustomHomeTopAppBar
-import com.abdroid.egylens.presentation.common.Loader
 import com.abdroid.egylens.presentation.common.ShimmerEffect
 import com.abdroid.egylens.presentation.navGraph.Route
 import com.google.firebase.database.DataSnapshot
@@ -72,6 +71,8 @@ fun HomeScreen(
 ) {
 
     var statuesList by remember { mutableStateOf(emptyList<Statue>()) }
+
+
 
     LaunchedEffect(Unit) {
         val statuesRef = viewModel.database.child("Statues")
@@ -96,7 +97,7 @@ fun HomeScreen(
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
 
     if (statuesList.isEmpty()) {
-        ShimmerEffect()
+        ShimmerEffect(modifier = Modifier)
     } else {
         Column(
             Modifier

@@ -38,6 +38,11 @@ import com.abdroid.egylens.presentation.profile.ProfileScreen
 import com.abdroid.egylens.presentation.profile.screens.FaqScreen
 import com.abdroid.egylens.presentation.home.screens.preScan.PreScanScreen
 import com.abdroid.egylens.presentation.search.SearchScreen
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 @Composable
 fun NavGraph(
@@ -152,7 +157,7 @@ fun NavGraph(
                 }
                 composable(route = Route.SearchScreen.route) {
                     OnBackClickStateSaver(navController = navController)
-                    SearchScreen()
+                    SearchScreen(navController)
                 }
                 composable(route = Route.FavoritesScreen.route) {
                     OnBackClickStateSaver(navController = navController)
@@ -171,21 +176,7 @@ fun NavGraph(
                 composable(route = Route.FaqScreen.route) {
                     FaqScreen()
                 }
-                /*composable(
-                    Route.DetailsScreen.route + "/{name}/{desc}/{about}/{imageUrl}",
-                    arguments = listOf(
-                        navArgument("name") { type = NavType.StringType },
-                        navArgument("desc") { type = NavType.StringType },
-                        navArgument("about") { type = NavType.StringType },
-                        navArgument("imageUrl") { type = NavType.StringType },
-                    )
-                ) { backStackEntry ->
-                    val name = backStackEntry.arguments?.getString("name") ?: ""
-                    val desc = backStackEntry.arguments?.getString("desc") ?: ""
-                    val about = backStackEntry.arguments?.getString("about") ?: ""
-                    val imageUrl = backStackEntry.arguments?.getString("imageUrl")?.replace("\\", "/") ?: ""
-                    DetailsScreen( navController , name, desc  , about , imageUrl)
-                }*/
+
                 composable(route = Route.DetailsScreen.route) {
                     navController.previousBackStackEntry?.savedStateHandle?.get<Statue?>("statue")
                         ?.let { statue ->
@@ -222,4 +213,3 @@ private fun navigateToTab(navController: NavController, route: String) {
         restoreState = true
     }
 }
-
