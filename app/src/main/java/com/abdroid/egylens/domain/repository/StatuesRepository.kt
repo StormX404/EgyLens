@@ -16,6 +16,6 @@ interface StatuesRepository {
 
     fun getAllStatues(): Flow<List<Statue>>
 
-    suspend fun getStatue(url: String): Statue?
+    suspend fun getStatue(name: String): Statue?
 
 }

@@ -8,8 +8,8 @@ class GetSavedStatue @Inject constructor(
     private val statueDao: StatueDao
 ) {
 
-    suspend operator fun invoke(url: String): Statue?{
-        return statueDao.getStatue(url = url)
+    suspend operator fun invoke(name: String): Statue?{
+        return statueDao.getStatue(name = name)
     }
 
 }

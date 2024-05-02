@@ -20,6 +20,6 @@ interface StatueDao {
     @Delete
     suspend fun deleteStatue(statue: Statue)
 
-    @Query("SELECT * FROM Statue WHERE imageUrl=:url")
-    suspend fun getStatue(url: String): Statue?
+    @Query("SELECT * FROM Statue WHERE name=:name")
+    suspend fun getStatue(name: String): Statue?
 }

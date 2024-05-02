@@ -9,9 +9,9 @@ import kotlinx.parcelize.Parcelize
 @Entity
 data class Statue(
     val statueId:Int = 1,
-    val name: String,
+    @PrimaryKey val name: String,
     val desc: String,
-    @PrimaryKey val imageUrl: String,
+    val imageUrl: String,
     val about :String,
 ) : Parcelable {
     constructor() : this(1,"", "", "" , "")

@@ -92,7 +92,7 @@ fun HomeScreen(
 
     val pagerState = rememberPagerState(
         pageCount = { statuesList.size },
-        initialPage = 1
+        initialPage = 0
     )
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
 

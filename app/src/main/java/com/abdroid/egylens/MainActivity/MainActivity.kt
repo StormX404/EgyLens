@@ -2,6 +2,7 @@ package com.abdroid.egylens.MainActivity
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,6 +23,7 @@ import com.abdroid.egylens.presentation.navGraph.Route
 import com.abdroid.egylens.ui.theme.EgyLensTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -30,6 +32,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setLocaleToEnglish()
 
         if (!arePermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -77,6 +81,13 @@ class MainActivity : ComponentActivity() {
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO
         )
+    }
+    private fun setLocaleToEnglish() {
+        val locale = Locale("en") // English locale
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 }
 

@@ -59,7 +59,7 @@ fun AppBottomNavigation(
                             fontWeight = FontWeight.SemiBold,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            color = colorResource(id = R.color.main_text)
+                            //color = colorResource(id = R.color.main_text)
                         )
                     }
                 },

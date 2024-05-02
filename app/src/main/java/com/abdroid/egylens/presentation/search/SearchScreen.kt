@@ -34,7 +34,6 @@ fun SearchScreen(navController: NavController , viewModel: SearchViewModel = hil
     var search by rememberSaveable { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
 
-
     val statuesRef = Firebase.database.reference.child("Statues")
 
         viewModel.fetchData(search, statuesRef)
@@ -66,7 +65,6 @@ fun SearchScreen(navController: NavController , viewModel: SearchViewModel = hil
         }
 
         if (search.isNotBlank()) {
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize().padding(horizontal = 20.dp),
@@ -90,8 +88,9 @@ fun SearchScreen(navController: NavController , viewModel: SearchViewModel = hil
             ShimmerEffectList()
         }
     }
-
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
     }
+
+
 }

@@ -26,7 +26,7 @@ class StatuesRepositoryImpl @Inject constructor(
         return statueDao.getAllStatues()
     }
 
-    override suspend fun getStatue(url: String): Statue? {
-        return statueDao.getStatue(url = url)
+    override suspend fun getStatue(name: String): Statue? {
+        return statueDao.getStatue(name = name)
     }
 }

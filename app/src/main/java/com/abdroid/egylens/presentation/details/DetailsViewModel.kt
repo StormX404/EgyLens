@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.PrimaryKey
 import com.abdroid.egylens.domain.manager.LocalUserManager
 import com.abdroid.egylens.domain.model.Statue
 import com.abdroid.egylens.domain.usecases.statues.DeleteStatue
@@ -34,7 +35,7 @@ class DetailsViewModel @Inject constructor(
         when (event) {
             is DetailsEvent.UpsertDeleteStatue -> {
                 viewModelScope.launch {
-                    val statue = getSavedArticleUseCase(url = event.statue.imageUrl)
+                    val statue = getSavedArticleUseCase(name = event.statue.name)
                     if (statue == null){
                         upsertArticle(statue = event.statue)
                     }else{
