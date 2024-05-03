@@ -1,6 +1,5 @@
 package com.abdroid.egylens.domain.repository
 
-import androidx.paging.PagingData
 import com.abdroid.egylens.domain.model.Statue
 import kotlinx.coroutines.flow.Flow
 

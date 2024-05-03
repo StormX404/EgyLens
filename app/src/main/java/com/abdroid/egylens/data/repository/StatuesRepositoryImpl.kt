@@ -1,8 +1,5 @@
 package com.abdroid.egylens.data.repository
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import com.abdroid.egylens.data.local.StatueDao
 import com.abdroid.egylens.domain.model.Statue
 import com.abdroid.egylens.domain.repository.StatuesRepository

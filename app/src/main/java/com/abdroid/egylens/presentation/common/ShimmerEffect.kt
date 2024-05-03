@@ -203,8 +203,6 @@ fun ShimmerEffectList(modifier: Modifier = Modifier.padding(horizontal = 20.dp))
         CardShimmerEffect(modifier)
         CardShimmerEffect(modifier)
         CardShimmerEffect(modifier)
-        CardShimmerEffect(modifier)
-        CardShimmerEffect(modifier)
     }
 }
 
