@@ -64,7 +64,7 @@ fun DetailsScreen(
 
     ) {
 
-    val isBookmarked by viewModel.isArticleBookmarked(statue.imageUrl).collectAsState(initial = false)
+    val isBookmarked by viewModel.isArticleBookmarked(statue.name).collectAsState(initial = false)
 
     Box(
         Modifier
@@ -72,7 +72,7 @@ fun DetailsScreen(
             .fillMaxSize()
     ) {
 
-        var iconTint by remember { mutableStateOf(Color.White) }
+        //var iconTint by remember { mutableStateOf(Color.White) }
 
         val scrollState = rememberScrollState()
         val scrolled by remember {
@@ -234,7 +234,7 @@ fun DetailsScreen(
                         .background(Color.Black.copy(alpha = .3f))
                         .clickable {
                             event(DetailsEvent.UpsertDeleteStatue(statue))
-                            viewModel.toggleBookmark(statue.imageUrl)
+                            viewModel.toggleBookmark(statue.name)
                         },
                     contentAlignment = Alignment.Center
                 ) {

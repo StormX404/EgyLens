@@ -49,17 +49,17 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    fun isArticleBookmarked(statueUrl: String): Flow<Boolean> {
-        return userManager.readIsBookmarked(statueUrl)
+    fun isArticleBookmarked(name: String): Flow<Boolean> {
+        return userManager.readIsBookmarked(name)
     }
 
-    fun toggleBookmark(statueUrl: String) {
+    fun toggleBookmark(name: String) {
         viewModelScope.launch {
-            val isBookmarked = userManager.readIsBookmarked(statueUrl).first()
+            val isBookmarked = userManager.readIsBookmarked(name).first()
             if (isBookmarked) {
-                userManager.saveIsBookmarked(statueUrl, false)
+                userManager.saveIsBookmarked(name, false)
             } else {
-                userManager.saveIsBookmarked(statueUrl, true)
+                userManager.saveIsBookmarked(name, true)
             }
         }
     }

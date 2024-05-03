@@ -160,21 +160,21 @@ fun ProfileScreen(
                 .fillMaxSize()
                 .padding(15.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
 
             ProfileCard(icon = painterResource(id = R.drawable.profile), text = "Personal Information" , onClick = {})
 
-            ProfileCard(icon = painterResource(id = R.drawable.bookmark_bulk), text = "Bookmarks", onClick = {})
+            /*ProfileCard(icon = painterResource(id = R.drawable.bookmark_bulk), text = "Bookmarks", onClick = {})
 
-            ProfileCard(icon = painterResource(id = R.drawable.translate), text = "Change Language", onClick = {})
+            ProfileCard(icon = painterResource(id = R.drawable.translate), text = "Change Language", onClick = {})*/
 
-            ThemeProfileCard(
+            /*ThemeProfileCard(
                 icon = painterResource(id = R.drawable.moon),
                 text = "Dark Mode", darkTheme = darkTheme,
                 onThemeUpdated = {
                     darkTheme = !darkTheme }
-            )
+            )*/
 
             ProfileCard(icon = painterResource(id = R.drawable.message_question), text = "FAQ", onClick = {
                 navController.navigate(Route.FaqScreen.route)

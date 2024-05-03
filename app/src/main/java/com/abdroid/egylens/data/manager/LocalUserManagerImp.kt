@@ -28,15 +28,15 @@ class LocalUserManagerImp(
             preferences[PreferenceKeys.APP_ENTRY] ?: false
         }
     }
-    override suspend fun saveIsBookmarked(statueUrl: String, isBookmarked: Boolean) {
+    override suspend fun saveIsBookmarked(name: String, isBookmarked: Boolean) {
         context.dataStore.edit { settings ->
-            settings[PreferenceKeys.isBookmarked(statueUrl)] = isBookmarked
+            settings[PreferenceKeys.isBookmarked(name)] = isBookmarked
         }
     }
 
-    override fun readIsBookmarked(statueUrl: String): Flow<Boolean> {
+    override fun readIsBookmarked(name: String): Flow<Boolean> {
         return context.dataStore.data.map { preferences ->
-            preferences[PreferenceKeys.isBookmarked(statueUrl)] ?: false
+            preferences[PreferenceKeys.isBookmarked(name)] ?: false
         }
     }
 }
@@ -49,5 +49,5 @@ val Context.dataStore: DataStore<Preferences> by readOnlyProperty
 
 private object PreferenceKeys {
     val APP_ENTRY = booleanPreferencesKey(Constants.APP_ENTRY)
-    fun isBookmarked(statueUrl: String) = booleanPreferencesKey(name = "is_bookmarked_$statueUrl")
+    fun isBookmarked(name: String) = booleanPreferencesKey(name = "is_bookmarked_$name")
 }
