@@ -3,6 +3,7 @@ package com.abdroid.egylens.presentation.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -111,7 +112,7 @@ fun HomeScreen(
             HorizontalDivider(
                 modifier = Modifier.fillMaxWidth(),
                 thickness = 1.dp,
-                color = colorResource(id = R.color.dvider)
+                color = colorResource(id = R.color.divider)
             )
             Spacer(modifier = Modifier.height(10.dp))
             Row(
@@ -250,9 +251,14 @@ fun HomeScreen(
                 }
                 Surface(
                     modifier = Modifier
-                        .padding(bottom = 8.dp),
+                        .padding(bottom = 8.dp)
+                        .border(
+                            1.dp,
+                            colorResource(id = R.color.text_field_border),
+                            shape = CircleShape
+                        ),
                     shape = CircleShape,
-                    color = colorResource(id = R.color.main_text).copy(alpha = 0.8f)
+                    color = colorResource(id = R.color.indicator)
                 ) {
                     CustomDotsIndicator(
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),

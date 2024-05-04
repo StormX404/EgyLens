@@ -46,7 +46,7 @@ fun FaqScreen() {
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 1.dp,
-            color = colorResource(id = R.color.dvider)
+            color = colorResource(id = R.color.divider)
         )
         LazyColumn(modifier = Modifier.padding(vertical = 10.dp , horizontal = 10.dp)) {
             items(faqs) { faq ->

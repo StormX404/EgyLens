@@ -34,6 +34,8 @@ sealed class Route(
 
     object FaqScreen : Route(route = "faqScreen")
 
+    object PersonalInfoScreen : Route(route = "personalInfoScreen")
+
     object DetailsScreen : Route(route = "detailsScreen")
 
 }

@@ -103,7 +103,7 @@ fun DetailsScreen(
                 .statusBarsPadding()
                 .systemBarsPadding()
                 .padding(20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween , verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
@@ -122,6 +122,13 @@ fun DetailsScreen(
                     tint = Color.White,
                 )
             }
+            Text(
+                text = "Details",
+                fontFamily = notoFont,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Normal,
+                color = colorResource(id = R.color.main_text),
+            )
             Box(
                 modifier = Modifier
                     .size(40.dp)
@@ -130,7 +137,8 @@ fun DetailsScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.bookmark_outlined),
+                    modifier = Modifier.size(28.dp),
+                    painter = painterResource(id = R.drawable.outlined_logo),
                     contentDescription = "",
                     tint = Color.White,
 

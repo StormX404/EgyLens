@@ -1,12 +1,10 @@
 
 package com.abdroid.egylens.presentation.profile
 
-import android.content.res.Resources.Theme
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,26 +16,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -52,8 +40,6 @@ import com.abdroid.egylens.presentation.common.CustomTopAppBar
 import com.abdroid.egylens.presentation.common.LogOutDialog
 import com.abdroid.egylens.presentation.profile.components.ProfileCard
 import com.abdroid.egylens.presentation.navGraph.Route
-import com.abdroid.egylens.presentation.profile.components.ThemeProfileCard
-import com.abdroid.egylens.ui.theme.DarkRed
 import com.abdroid.egylens.ui.theme.notoFont
 import kotlinx.coroutines.launch
 
@@ -65,7 +51,6 @@ fun ProfileScreen(
     ) {
     val successDialog = remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    var darkTheme by remember { mutableStateOf(false) }
 
     if (successDialog.value) {
         LogOutDialog(title = "Logout",
@@ -101,7 +86,7 @@ fun ProfileScreen(
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 1.dp,
-            color = colorResource(id = R.color.dvider)
+            color = colorResource(id = R.color.divider)
         )
         Row(
             modifier = Modifier.padding(20.dp),
@@ -128,7 +113,7 @@ fun ProfileScreen(
 
             Column(
                 modifier = Modifier.padding(horizontal = 10.dp),
-                horizontalAlignment = Alignment.Start,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
@@ -152,7 +137,7 @@ fun ProfileScreen(
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 1.dp,
-            color = colorResource(id = R.color.dvider)
+            color = colorResource(id = R.color.divider)
         )
 
         Column(
@@ -163,7 +148,9 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
 
-            ProfileCard(icon = painterResource(id = R.drawable.profile), text = "Personal Information" , onClick = {})
+            ProfileCard(icon = painterResource(id = R.drawable.profile), text = "Personal Information" , onClick = {
+                navController.navigate(Route.PersonalInfoScreen.route)
+            })
 
             /*ProfileCard(icon = painterResource(id = R.drawable.bookmark_bulk), text = "Bookmarks", onClick = {})
 

@@ -40,7 +40,7 @@ fun FavoritesScreen(
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 1.dp,
-            color = colorResource(id = R.color.dvider)
+            color = colorResource(id = R.color.divider)
         )
         if (state.statues.isEmpty()){
             EmptyScreen(rawResId = R.raw.empty)

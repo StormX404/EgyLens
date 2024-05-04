@@ -44,7 +44,7 @@ fun Modifier.shimmerEffect(cornerRadius: CornerRadius = CornerRadius(x = 12f, y 
         ),
         label = "transparency of the background color"
     ).value
-    val color = colorResource(id = R.color.dvider).copy(alpha = alpha)
+    val color = colorResource(id = R.color.divider).copy(alpha = alpha)
     drawBehind {
         drawRoundRect(
             color = color,

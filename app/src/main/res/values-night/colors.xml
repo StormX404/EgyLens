@@ -17,13 +17,15 @@
     <color name="text_field_text">#FFFFFF</color>
     <color name="text_field_eye">#6A6A6A</color>
     <color name="back_button">#202020</color>
+    <color name="indicator">#141414</color>
+    <color name="un_selected_dots">#4B4B4B</color>
     <color name="google_text">#FFFFFF</color>
     <color name="nav_bar_selected_icon">#F7BC1E</color>
     <color name="nav_bar_selected_text">#F7BC1E</color>
     <color name="nav_bar_un_selected_icon">#FFFFFF</color>
     <color name="nav_bar_un_selected_text">#FFFFFF</color>
     <color name="bottom_bar">#141414</color>
-    <color name="dvider">#303030</color>
+    <color name="divider">#303030</color>
 
 
 </resources>

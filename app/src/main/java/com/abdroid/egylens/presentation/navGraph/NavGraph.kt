@@ -39,6 +39,7 @@ import com.abdroid.egylens.presentation.onBoardingScreen.OnBoardingViewModel
 import com.abdroid.egylens.presentation.profile.ProfileScreen
 import com.abdroid.egylens.presentation.profile.screens.FaqScreen
 import com.abdroid.egylens.presentation.home.screens.preScan.PreScanScreen
+import com.abdroid.egylens.presentation.profile.screens.personalInfo.PersonalInfoScreen
 import com.abdroid.egylens.presentation.search.SearchScreen
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -182,6 +183,9 @@ fun NavGraph(
                 }
                 composable(route = Route.FaqScreen.route) {
                     FaqScreen()
+                }
+                composable(route = Route.PersonalInfoScreen.route) {
+                    PersonalInfoScreen()
                 }
 
                 composable(route = Route.DetailsScreen.route) {

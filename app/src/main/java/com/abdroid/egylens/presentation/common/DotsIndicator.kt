@@ -38,7 +38,7 @@ fun CustomDotsIndicator(
     totalDots: Int,
     selectedIndex: Int,
     selectedColor: Color =  colorResource(id = R.color.scanner_button),
-    unSelectedColor: Color =  colorResource(id = R.color.dvider),
+    unSelectedColor: Color =  colorResource(id = R.color.un_selected_dots),
     dotSize: Dp
 ) {
     LazyRow(

@@ -50,7 +50,7 @@ fun SearchScreen(navController: NavController , viewModel: SearchViewModel = hil
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 1.dp,
-            color = colorResource(id = R.color.dvider)
+            color = colorResource(id = R.color.divider)
         )
         Row(modifier = Modifier
             .focusRequester(focusRequester)
