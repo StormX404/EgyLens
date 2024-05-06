@@ -134,6 +134,8 @@ fun SuccessHeader(modifier: Modifier) {
         modifier = modifier,)
 }
 
+
+
 @Composable
 fun LogOutDialog(
     title: String,
@@ -261,23 +263,115 @@ fun LogoutHeader(modifier: Modifier) {
         modifier = modifier,)
 }
 
-/*@Preview
 @Composable
-private fun CustomDialogPrev() {
-    CustomDialog(title = "Success",
-        desc = "This is a Success Dialog",
-        onDismiss = {
+fun ScanDialog(
+    title: String,
+    desc: String,
+    onDismiss: () -> Unit,
+) {
+    Dialog(
+        onDismissRequest = onDismiss
+    ) {
+        Box(
+            modifier = Modifier
+        ) {
+            Column(
+                modifier = Modifier
+            ) {
+                Spacer(modifier = Modifier.height(36.dp))
+                Box(
+                    modifier = Modifier
+                        .background(
+                            color = colorResource(id = R.color.text_field_bg),
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                    //.border(width = 1.dp, color = colorResource(id = R.color.text_field_border) , shape = RoundedCornerShape(16.dp))
 
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Spacer(modifier = Modifier.height(30.dp))
+                        Text(
+                            text = title,
+                            fontFamily = notoFont,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = colorResource(id = R.color.main_text)
+                        )
+                        //Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = desc,
+                            fontFamily = notoFont,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium,
+                            textAlign = TextAlign.Center,
+                            color = colorResource(id = R.color.second_text)
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Row(modifier = Modifier
+                            .fillMaxWidth() ,
+                            verticalAlignment = Alignment.CenterVertically ,
+                            horizontalArrangement = Arrangement.SpaceAround) {
+                            Button(
+                                modifier = Modifier
+                                    .height(40.dp)
+                                    .clip(RoundedCornerShape(12.dp)),
+                                //.padding(8.dp),
+                                onClick = {
+                                    onDismiss()
+                                },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = colorResource(id = R.color.main_button),
+                                    contentColor = colorResource(id = R.color.button_text)
+                                ),
+                                shape = RoundedCornerShape(size = 6.dp)
+                            ) {
+                                Text(
+                                    text = "Details",
+                                    fontFamily = notoFont,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = colorResource(id = R.color.button_text)
+                                )
+
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            SuccessStatueHeader(
+                modifier = Modifier
+                    .size(90.dp)
+                    .background(colorResource(id = R.color.text_field_bg), shape = CircleShape)
+                    .align(Alignment.TopCenter)
+            )
         }
-    )
-}*/
+    }
+}
+
+@Composable
+fun SuccessStatueHeader(modifier: Modifier) {
+    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.succesfull))
+    val progress by animateLottieCompositionAsState(
+        composition = composition,
+        /*iterations = LottieConstants.IterateForever,
+        isPlaying = true*/)
+
+    LottieAnimation(
+        composition = composition,
+        progress = progress,
+        modifier = modifier)
+}
+
 
 @Preview
 @Composable
 private fun LogoutDialogPrev() {
-    LogOutDialog(title = "Success",
-        desc = "This is a Success Dialog",
+    ScanDialog(title = "Ramses II",
+        desc = "This is a description of the statue which scanned by AI Model ",
         onDismiss = {},
-        onContinue = {}
     )
 }

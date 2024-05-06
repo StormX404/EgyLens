@@ -1,5 +1,6 @@
 package com.abdroid.egylens.presentation.navGraph
 
+import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -187,6 +188,7 @@ fun NavGraph(
                 composable(route = Route.PersonalInfoScreen.route) {
                     PersonalInfoScreen()
                 }
+
 
                 composable(route = Route.DetailsScreen.route) {
                     val viewModel: DetailsViewModel = hiltViewModel()

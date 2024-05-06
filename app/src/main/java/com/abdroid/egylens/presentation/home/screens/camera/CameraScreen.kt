@@ -1,13 +1,14 @@
 package com.abdroid.egylens.presentation.home.screens.camera
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,21 +18,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,12 +49,24 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.abdroid.egylens.MainActivity.MainActivity
 import com.abdroid.egylens.R
+import com.abdroid.egylens.presentation.common.ScanDialog
 import com.abdroid.egylens.ui.theme.notoFont
+import com.abdroid.egylens.util.Constants.BASE_URL
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
 
 
 @Composable
@@ -64,7 +74,13 @@ fun CameraScreen(
     navController: NavController,
     context: Context = LocalContext.current
 ) {
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.scanning_y))
+
+    val loading = remember { mutableStateOf(false) }
+
+    val rawRes = if (loading.value) R.raw.loading_3 else R.raw.scanning_y
+
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(rawRes))
+
     val progress by animateLottieCompositionAsState(
         composition,
         iterations = LottieConstants.IterateForever,
@@ -87,6 +103,21 @@ fun CameraScreen(
         Modifier
             .fillMaxSize()
     ) {
+
+        val selectedImageUri = remember { mutableStateOf<Uri?>(null) }
+
+        // ...
+
+        val galleryLauncher = rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.GetContent(),
+            onResult = { uri: Uri? ->
+                if (uri != null) {
+                    // Set the selected image URI
+                    selectedImageUri.value = uri
+                }
+            }
+        )
+
 
         val lifecycleOwner = LocalLifecycleOwner.current
         AndroidView(
@@ -121,7 +152,11 @@ fun CameraScreen(
                     color = Color.White,
                 )
             }
-            Column (modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
+            Column (modifier = Modifier
+                .fillMaxWidth()
+                .height(350.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
                 LottieAnimation(
                     composition = composition,
                     progress = { progress },
@@ -142,14 +177,7 @@ fun CameraScreen(
                         .size(45.dp)
                         .background(Color.White.copy(alpha = .5f))
                         .clickable {
-                            Intent(
-                                Intent.ACTION_VIEW,
-                                Uri.parse(
-                                    "content://media/internal/images/media"
-                                )
-                            ).also {
-                                context.startActivity(it)
-                            }
+                            galleryLauncher.launch("image/*")
                         },
                     contentAlignment = Alignment.Center
                 ) {
@@ -217,7 +245,51 @@ fun CameraScreen(
             }
         }
 
+        var result by remember { mutableStateOf("") }
+        val successDialog = remember { mutableStateOf(false) }
+        val callMade = remember { mutableStateOf(false) }
 
+        if (!callMade.value) {
+            selectedImageUri.value?.let { uri ->
+                if (!loading.value) {
+                    loading.value = true // Set loading to true when the network call starts
+                    val client = OkHttpClient()
+                    val mediaType = "image/*".toMediaType() // Change media type according to your image type
+                    val inputStream = context.contentResolver.openInputStream(uri)
+                    val requestBody = inputStream?.readBytes()?.toRequestBody(mediaType)
+
+                    val body = MultipartBody.Builder().setType(MultipartBody.FORM)
+                        .addFormDataPart("image", uri.path, requestBody!!)
+                        .build()
+
+                    val request = Request.Builder()
+                        .url(BASE_URL)
+                        .post(body)
+                        .build()
+
+                    client.newCall(request).enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            Toast.makeText(context , "Error" , Toast.LENGTH_LONG).show()
+                            e.printStackTrace()
+                            loading.value = false // Set loading to false when the network call finishes
+                        }
+
+                        override fun onResponse(call: Call, response: Response) {
+                            val responseBody = response.body?.string()
+                            val jsonResponse = JSONObject(responseBody.toString())
+                            val resultString = jsonResponse.getString("result")
+                            result = resultString
+                            successDialog.value = true
+                            loading.value = false // Set loading to false when the network call finishes
+                        }
+                    })
+                    callMade.value = true
+                }
+            }
+        }
+        if (successDialog.value) {
+            ScanDialog(title = result, desc = "The description will be here on this " , onDismiss = { successDialog.value = false })
+        }
 
 
     }
