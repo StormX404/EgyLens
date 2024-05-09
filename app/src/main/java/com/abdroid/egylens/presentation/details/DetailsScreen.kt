@@ -1,5 +1,6 @@
 package com.abdroid.egylens.presentation.details
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +32,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,6 +48,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.abdroid.egylens.R
 import com.abdroid.egylens.domain.model.Statue
+import com.abdroid.egylens.presentation.common.VideoPlayer
 import com.abdroid.egylens.ui.theme.notoFont
 
 
@@ -62,6 +67,7 @@ fun DetailsScreen(
         Modifier
             .background(colorResource(id = R.color.background))
             .fillMaxSize()
+            .statusBarsPadding()
     ) {
 
         //var iconTint by remember { mutableStateOf(Color.White) }
@@ -79,7 +85,7 @@ fun DetailsScreen(
         )
 
 
-        Image(
+        /*Image(
             modifier = Modifier
                 .height(400.dp)
                 .fillMaxWidth(),
@@ -87,7 +93,9 @@ fun DetailsScreen(
             contentScale = ContentScale.Crop,
             contentDescription = null,
             alignment = Alignment.TopCenter
-        )
+        )*/
+        val isPlaying = remember { mutableStateOf(false) }
+        VideoPlayer( statue.videoUrl , isPlaying.value)
         Image(
             modifier = Modifier
                 .height(400.dp)
@@ -112,7 +120,7 @@ fun DetailsScreen(
                     .background(Color.Black.copy(alpha = .3f))
                     .clickable {
                         navController.popBackStack()
-                               },
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -169,13 +177,50 @@ fun DetailsScreen(
             }
 
             Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-                Text(
-                    text = statue.name,
-                    fontFamily = notoFont,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = colorResource(id = R.color.main_text),
-                )
+                Row(modifier = Modifier.fillMaxWidth() , horizontalArrangement = Arrangement.SpaceBetween , verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = statue.name,
+                        fontFamily = notoFont,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = colorResource(id = R.color.main_text),
+                    )
+                    Button(
+                        modifier = Modifier,
+                        onClick = { isPlaying.value = !isPlaying.value
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(id = R.color.main_button),
+                            contentColor = colorResource(id = R.color.button_text)
+                        ),
+                        shape = CircleShape
+                    ) {
+
+                        val text = if (isPlaying.value) "Pause" else "Play"
+                        val painterId = if (isPlaying.value) R.drawable.pause else R.drawable.play
+                        Row (
+                            horizontalArrangement = Arrangement.Center ,
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Icon(
+                                modifier = Modifier.size(10.dp),
+                                painter = painterResource(id =painterId),
+                                contentDescription = "",
+                                tint = colorResource(id = R.color.button_text)
+                            )
+                            Spacer(modifier = Modifier.width(5.dp))
+                            Text(
+                                text = text,
+                                fontFamily = notoFont,
+                                fontWeight = FontWeight.Medium,
+                                color = colorResource(id = R.color.button_text)
+                            )
+                        }
+
+                    }
+
+                }
+
                 Text(
                     text = statue.desc,
                     fontFamily = notoFont,
