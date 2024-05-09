@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.abdroid.egylens.R
+import com.abdroid.egylens.domain.model.Statue
 import com.abdroid.egylens.ui.theme.notoFont
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -265,8 +266,7 @@ fun LogoutHeader(modifier: Modifier) {
 
 @Composable
 fun ScanDialog(
-    title: String,
-    desc: String,
+    statue: Statue,
     onDismiss: () -> Unit,
 ) {
     Dialog(
@@ -294,7 +294,7 @@ fun ScanDialog(
                     ) {
                         Spacer(modifier = Modifier.height(30.dp))
                         Text(
-                            text = title,
+                            text = statue.name,
                             fontFamily = notoFont,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.SemiBold,
@@ -302,7 +302,7 @@ fun ScanDialog(
                         )
                         //Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = desc,
+                            text = statue.desc,
                             fontFamily = notoFont,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium,
@@ -366,12 +366,3 @@ fun SuccessStatueHeader(modifier: Modifier) {
         modifier = modifier)
 }
 
-
-@Preview
-@Composable
-private fun LogoutDialogPrev() {
-    ScanDialog(title = "Ramses II",
-        desc = "This is a description of the statue which scanned by AI Model ",
-        onDismiss = {},
-    )
-}

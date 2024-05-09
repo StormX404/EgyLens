@@ -38,6 +38,5 @@ sealed class Route(
 
     object DetailsScreen : Route(route = "detailsScreen")
 
-    object PredictScreen : Route(route = "predictScreen")
 
 }

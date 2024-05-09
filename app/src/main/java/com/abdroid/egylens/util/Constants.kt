@@ -8,6 +8,6 @@ object Constants {
 
     const val SERVER_CLIENT = "873724485593-k8habmuv7bjotqt1c5dg7mkdo9blcs1j.apps.googleusercontent.com"
 
-    const val BASE_URL = "https://4a23-102-187-1-55.ngrok-free.app/api/process-image/"
+    const val BASE_URL = "https://a4b7-102-187-42-123.ngrok-free.app/api/process-image/"
 
 }

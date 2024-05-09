@@ -12,7 +12,8 @@ data class Statue(
     @PrimaryKey val name: String,
     val desc: String,
     val imageUrl: String,
+    val videoUrl: String,
     val about :String,
 ) : Parcelable {
-    constructor() : this(1,"", "", "" , "")
+    constructor() : this(1,"", "", "" , "","")
 }
