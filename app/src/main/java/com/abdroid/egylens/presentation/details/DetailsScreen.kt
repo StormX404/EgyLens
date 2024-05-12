@@ -1,6 +1,5 @@
 package com.abdroid.egylens.presentation.details
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,7 +31,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.rememberAsyncImagePainter
 import com.abdroid.egylens.R
 import com.abdroid.egylens.domain.model.Statue
 import com.abdroid.egylens.presentation.common.VideoPlayer
@@ -70,7 +67,6 @@ fun DetailsScreen(
             .statusBarsPadding()
     ) {
 
-        //var iconTint by remember { mutableStateOf(Color.White) }
 
         val scrollState = rememberScrollState()
         val scrolled by remember {
@@ -84,16 +80,6 @@ fun DetailsScreen(
             label = ""
         )
 
-
-        /*Image(
-            modifier = Modifier
-                .height(400.dp)
-                .fillMaxWidth(),
-            painter = rememberAsyncImagePainter(statue.imageUrl),
-            contentScale = ContentScale.Crop,
-            contentDescription = null,
-            alignment = Alignment.TopCenter
-        )*/
         val isPlaying = remember { mutableStateOf(false) }
         VideoPlayer( statue.videoUrl , isPlaying.value)
         Image(
