@@ -167,7 +167,9 @@ fun ProfileScreen(
                 navController.navigate(Route.FaqScreen.route)
             })
 
-            ProfileCard(icon = painterResource(id = R.drawable.info_circle), text = "About", onClick = {})
+            ProfileCard(icon = painterResource(id = R.drawable.info_circle), text = "About", onClick = {
+                navController.navigate(Route.AboutScreen.route)
+            })
 
             ProfileCard(icon = painterResource(id = R.drawable.logout), text = "Logout", onClick = {
                 successDialog.value = true
