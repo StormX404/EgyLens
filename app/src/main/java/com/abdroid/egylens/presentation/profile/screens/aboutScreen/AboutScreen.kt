@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.sp
 import com.abdroid.egylens.R
 import com.abdroid.egylens.presentation.common.CustomTopAppBar
 import com.abdroid.egylens.presentation.common.TeamMember
-import com.abdroid.egylens.presentation.profile.components.FaqCard
 import com.abdroid.egylens.ui.theme.notoFont
 
 @Composable
@@ -36,9 +35,10 @@ fun AboutScreen() {
     val teamMembers = listOf(
         TeamMembersData(R.drawable.team_leader, "Omar Nabil", "Team Leader | Back End Developer"),
         TeamMembersData(R.drawable.android, "Abdelrahman Yasser", "Android Developer"),
-        TeamMembersData(R.drawable.android, "Ahmed Abdelkhalek", "AI Developer"),
-        TeamMembersData(R.drawable.android, "Omnia Ahmed", "UI / UX Designer"),
-        TeamMembersData(R.drawable.android, "Dina Abdelrahman", "UI/UX Designer"),
+        TeamMembersData(R.drawable.ai, "Ahmed Abdelkhalek", "AI Developer"),
+        TeamMembersData(R.drawable.ui_ux, "Omnia Ahmed", "UI / UX Designer"),
+        TeamMembersData(R.drawable.web, "Dina Abdelrahman", "Web Developer"),
+        TeamMembersData(R.drawable.data, "Mostafa Ali", "Data collector"),
     )
     Column(
         Modifier
@@ -69,13 +69,12 @@ fun AboutScreen() {
                         shape = RoundedCornerShape(14.dp)
                     )
                     .clip(RoundedCornerShape(14.dp))
-                    .background(color = colorResource(id = R.color.text_field_bg))
                     .padding(14.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Egy Lens is an Android app that scans statues to provide detailed info and animated videos. Statues come to life , educational experience.",
+                    text = "Egy Lens is an Android app that scans statues to provide detailed info and Statues comes to life .",
                     fontFamily = notoFont,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
