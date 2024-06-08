@@ -1,11 +1,8 @@
 package com.abdroid.egylens.presentation.common
 
 import androidx.annotation.OptIn
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -20,14 +17,12 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.media3.common.MediaItem
-import androidx.media3.common.MediaMetadata
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.PlayerView
-import com.google.common.net.MediaType
 
 @OptIn(UnstableApi::class)
 @Composable
@@ -76,8 +71,8 @@ fun VideoPlayer(videoUrl: String,isPlaying: Boolean) {
 
     AndroidView(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(450.dp), // Change height to 400.dp
+            .fillMaxWidth(),
+            //.height(400.dp), // Change height to 400.dp
         factory = {
             playerView.player = exoPlayer
             playerView
