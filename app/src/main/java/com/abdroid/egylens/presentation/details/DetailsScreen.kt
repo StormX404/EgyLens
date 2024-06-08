@@ -88,7 +88,9 @@ fun DetailsScreen(
         )
 
         val isPlaying = remember { mutableStateOf(false) }
+
         VideoPlayer( statue.videoUrl , isPlaying.value)
+
         Image(
             modifier = Modifier
                 .height(400.dp)
