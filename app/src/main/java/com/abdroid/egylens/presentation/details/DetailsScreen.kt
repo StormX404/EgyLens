@@ -1,5 +1,9 @@
 package com.abdroid.egylens.presentation.details
 
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -57,6 +61,9 @@ fun DetailsScreen(
     viewModel: DetailsViewModel = hiltViewModel()
 
     ) {
+    val openMaps = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { }
 
     val isBookmarked by viewModel.isArticleBookmarked(statue.name).collectAsState(initial = false)
 
@@ -244,7 +251,12 @@ fun DetailsScreen(
                         .fillMaxWidth(.8f)
                         .height(52.dp)
                         .clip(RoundedCornerShape(14.dp)),
-                    onClick = {},
+                    onClick = {
+                        val gmmIntentUri = Uri.parse("geo:0,0?q=X4VF+V38 The Grand Egyptian Museum GEM, Cairo - Alexandria Desert Rd, Kafr Nassar, Al Haram, Giza Governorate 3513204")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                        mapIntent.setPackage("com.google.android.apps.maps")
+                        openMaps.launch(mapIntent)
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.main_button),
                         contentColor = colorResource(id = R.color.button_text)

@@ -34,7 +34,6 @@ class SearchViewModel @Inject constructor(
                               kotlin.math.abs(it.name.length - search.length)
                          }
                     }
-
                     override fun onCancelled(error: DatabaseError) {
                          // Handle error
                     }

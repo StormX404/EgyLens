@@ -152,17 +152,6 @@ fun ProfileScreen(
                 navController.navigate(Route.PersonalInfoScreen.route)
             })
 
-            /*ProfileCard(icon = painterResource(id = R.drawable.bookmark_bulk), text = "Bookmarks", onClick = {})
-
-            ProfileCard(icon = painterResource(id = R.drawable.translate), text = "Change Language", onClick = {})*/
-
-            /*ThemeProfileCard(
-                icon = painterResource(id = R.drawable.moon),
-                text = "Dark Mode", darkTheme = darkTheme,
-                onThemeUpdated = {
-                    darkTheme = !darkTheme }
-            )*/
-
             ProfileCard(icon = painterResource(id = R.drawable.message_question), text = "FAQ", onClick = {
                 navController.navigate(Route.FaqScreen.route)
             })
