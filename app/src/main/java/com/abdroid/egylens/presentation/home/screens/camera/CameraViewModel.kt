@@ -71,7 +71,7 @@ class CameraViewModel @Inject constructor(
                 // Use Handler to post to the main thread
                 Handler(Looper.getMainLooper()).post {
                     onFailure.invoke()
-                    Toast.makeText(context, "Failed to upload image", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "No detection", Toast.LENGTH_SHORT).show()
                 }
                 e.printStackTrace()
             }
@@ -87,7 +87,7 @@ class CameraViewModel @Inject constructor(
                     // Use Handler to post to the main thread
                     Handler(Looper.getMainLooper()).post {
                         onFailure.invoke()
-                        Toast.makeText(context, "No detection or Failed to connect to the server", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "failed to connect to the server", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
