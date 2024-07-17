@@ -27,10 +27,10 @@ An innovative app Egy lens (Explore Egypt) using AI and Machine Learning that in
 ### :email: Contact ##
 
 <p align="center">
-<a href="https://www.linkedin.com/in/eslam-mohamed-8b6a1124a" target="_blank">
+<a href=https://www.linkedin.com/in/vbdoyasser/" target="_blank">
     <img src="https://img.shields.io/badge/Connect-Abdelrahman Yasser-blue.svg?style=flat&logo=linkedin" alt="linkedin"/>
 </a>
-<a href="https://www.linkedin.com/in/eslam-mohamed-8b6a1124a" target="_blank">
+<a href="https://www.linkedin.com/in/omarnabil10/" target="_blank">
     <img src="https://img.shields.io/badge/Connect-Omar Nabil-blue.svg?style=flat&logo=linkedin" alt="linkedin"/>
 </a>
 </p>
